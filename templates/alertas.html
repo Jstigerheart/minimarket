@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Stock bajo (≤ {{ minimo }} unidades)</h2>
+<table>
+  <tr><th>Producto</th><th>Stock</th></tr>
+  {% for p in productos %}
+  <tr class="bajo"><td>{{ p.nombre }}</td><td>{{ p.stock }}</td></tr>
+  {% else %}
+  <tr><td colspan="2">Todo el inventario está por encima del mínimo.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

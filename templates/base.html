@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Minimarket{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Minimarket</h1>
+    <nav>
+      <a href="{{ url_for('productos') }}">Productos</a>
+      <a href="{{ url_for('venta') }}">Nueva venta</a>
+      <a href="{{ url_for('alertas') }}">Stock bajo</a>
+      <a href="{{ url_for('reporte') }}">Reporte del día</a>
+    </nav>
+  </header>
+  <main>
+    {% with msgs = get_flashed_messages(with_categories=true) %}
+      {% for cat, m in msgs %}<p class="msg {{ cat }}">{{ m }}</p>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Reporte de ventas</h2>
+<form method="get" class="inline">
+  <input type="date" name="fecha" value="{{ dia }}">
+  <button>Ver día</button>
+</form>
+<p class="total">Total del día: <strong>${{ '{:,.0f}'.format(total_dia) }}</strong> ({{ ventas|length }} ventas)</p>
+<h3>Productos vendidos</h3>
+<table>
+  <tr><th>Producto</th><th>Unidades</th><th>Total</th></tr>
+  {% for d in detalle %}
+  <tr><td>{{ d.nombre }}</td><td>{{ d.unidades }}</td><td>${{ '{:,.0f}'.format(d.total) }}</td></tr>
+  {% else %}
+  <tr><td colspan="3">No hay ventas en esta fecha.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

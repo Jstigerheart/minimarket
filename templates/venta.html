@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Nueva venta</h2>
+<form method="post">
+  <table>
+    <tr><th>Producto</th><th>Precio</th><th>Disponible</th><th>Cantidad</th></tr>
+    {% for p in productos %}
+    <tr>
+      <td>{{ p.nombre }}</td><td>${{ '{:,.0f}'.format(p.precio) }}</td><td>{{ p.stock }}</td>
+      <td><input name="cant_{{ p.id }}" type="number" min="0" max="{{ p.stock }}" value="0"></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4">No hay productos con stock. Agrégalos en Productos.</td></tr>
+    {% endfor %}
+  </table>
+  {% if productos %}<button>Registrar venta</button>{% endif %}
+</form>
+{% endblock %}
